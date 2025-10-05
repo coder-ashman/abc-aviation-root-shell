@@ -12,15 +12,14 @@
           "single-spa-layout": "https://esm.sh/single-spa-layout@2.0.0",
           "react": "https://cdn.skypack.dev/react@18",
           "react-dom": "https://cdn.skypack.dev/react-dom@18",
-          "@owner-portal/web": "http://localhost:4173/remoteEntry.js",
+          "@owner-portal/web": "/owner-portal-web/assets/remoteEntry.js",
           "@owner-portal/native": "/owner-portal-native/index.js",
-          "@crew/training-a": "http://localhost:4200/main.single-spa.js",
-          "@crew/training-b": "http://localhost:4201/main.single-spa.js",
-          "@maintenance/app": "http://localhost:4202/main.js",
+          "@crew/training": "/training-a/remoteEntry.js",
+          "@crew/training-a": "/training-a/remoteEntry.js",
+          "@crew/training-b": "/training-b/remoteEntry.js",
+          "@maintenance/app": "/maintenance/remoteEntry.js",
           "@shared/notifications": "/parcels/notifications.js",
-          "@shared/chat": "/parcels/chat.js",
-          "@shared/domain-rules": "/shared/domain-rules.js",
-          "@shared/ui": "/shared/ui.js"
+          "@shared/chat": "/parcels/chat.js"
         },
         "scopes": {
           "/subsidiary-b/": {
@@ -49,8 +48,7 @@
         <strong>ABC Aviation</strong>
       </div>
       <nav class="shell-header__nav">
-        <a href="/" data-nav-link>Home</a>
-        <a href="/owner" data-nav-link>Owner Portal</a>
+        <a href="/" data-nav-link>Owner Portal</a>
         <a href="/training/a" data-nav-link>Training A</a>
         <a href="/training/b" data-nav-link>Training B</a>
         <a href="/maintenance" data-nav-link>Maintenance</a>
@@ -65,8 +63,8 @@
     </header>
     <single-spa-router>
       <main id="main-slot">
-        <!-- Owner portal route -->
-        <route path="/owner">
+        <!-- Root route: Owner portal web -->
+        <route path="/">
           <application name="@owner-portal/web"></application>
         </route>
         <!-- Training routes -->
@@ -79,13 +77,6 @@
         <!-- Maintenance route -->
         <route path="/maintenance">
           <application name="@maintenance/app"></application>
-        </route>
-        <!-- Root route: Shell only (no microfrontend) - must be last as default -->
-        <route default>
-          <div class="welcome-page">
-            <h1>ABC Aviation Management Portal</h1>
-            <p>Select a module from the navigation menu to get started.</p>
-          </div>
         </route>
       </main>
       <aside id="aside-slot">
@@ -100,12 +91,12 @@
     ></import-map-overrides-full>
     <!-- Load the root config and start single‑spa -->
     <!-- Load environment-based configuration first, before single-spa -->
-    <script src="/src/env-config.js"></script>
+    <script src="./src/env-config.js"></script>
     <script type="module">
       import { start } from 'single-spa';
-      import rootConfig from '/src/root-config.js';
-      import '/src/brand-switcher.js';
-      import '/src/shell-header.js';
+      import rootConfig from './src/root-config.js';
+      import './src/brand-switcher.js';
+      import './src/shell-header.js';
       rootConfig();
       start();
     </script>

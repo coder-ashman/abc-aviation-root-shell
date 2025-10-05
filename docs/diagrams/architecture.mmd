@@ -1,0 +1,44 @@
+flowchart TB
+  subgraph Shell[Root Shell]
+    IM[Import Map]
+    LE[Single-SPA Layout Engine]
+    RC[Root Config]
+    Theme[CSS Theme Vars]
+  end
+
+  subgraph Parcels[Always-On Parcels]
+    Notif[Notifications Parcel]
+    Chat[Chat Parcel]
+  end
+
+  subgraph OwnerPortal[Owner Portal (React + MF)]
+    MF[remoteEntry.js]
+    OPApp[./root lifecycle]
+  end
+
+  subgraph TrainingA[Training A (Angular)]
+    AEntry[main.single-spa.js]
+  end
+
+  subgraph TrainingB[Training B (RN Web)]
+    BEntry[main.single-spa.js]
+  end
+
+  subgraph Maintenance[Maintenance (Vue)]
+    VLib[main.js (lib)]
+    VCss[style.css]
+  end
+
+  IM -->|maps names to URLs| RC
+  RC -->|registerApplication| LE
+  LE -->|route change| OPApp
+  LE --> AEntry
+  LE --> BEntry
+  LE --> VLib
+  Shell --> Parcels
+  Theme --> OPApp
+  Theme --> AEntry
+  Theme --> BEntry
+  Theme --> VLib
+  VLib --> VCss
+

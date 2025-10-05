@@ -1,7 +1,7 @@
 /*
  * Theme definitions for the root shell.
  * Each brand defines CSS variables for colours and typography.
- * These variables are consumed by NativeWind, Tailwind and MUI across micro‑frontends.
+ * These variables are consumed by micro-frontends for consistent theming.
  */
 
 :root {
@@ -13,49 +13,354 @@
 :root[data-brand="A"] {
   --color-primary-rgb: 25 118 210; /* blue */
   --color-secondary-rgb: 255 193 7; /* amber */
-  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
-  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
-  --tailwind-primary: 25 118 210;
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-secondary: rgb(var(--color-secondary-rgb));
 }
 
 /* Brand B */
 :root[data-brand="B"] {
   --color-primary-rgb: 210 85 27; /* orange */
   --color-secondary-rgb: 0 150 136; /* teal */
-  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
-  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
-  --tailwind-primary: 210 85 27;
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-secondary: rgb(var(--color-secondary-rgb));
 }
 
 /* Brand C */
 :root[data-brand="C"] {
   --color-primary-rgb: 93 64 155; /* purple */
   --color-secondary-rgb: 244 67 54; /* red */
-  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
-  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
-  --tailwind-primary: 93 64 155;
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-secondary: rgb(var(--color-secondary-rgb));
 }
 
 /* Brand Atlantic */
 :root[data-brand="Atlantic"] {
   --color-primary-rgb: 0 102 204; /* deep blue */
   --color-secondary-rgb: 0 153 51; /* green */
-  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
-  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
-  --tailwind-primary: 0 102 204;
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-secondary: rgb(var(--color-secondary-rgb));
 }
 
 /* Brand Pacific */
 :root[data-brand="Pacific"] {
   --color-primary-rgb: 0 172 193; /* cyan */
   --color-secondary-rgb: 255 87 34; /* deep orange */
-  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
-  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
-  --tailwind-primary: 0 172 193;
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-secondary: rgb(var(--color-secondary-rgb));
+}
+
+/* Welcome page styling */
+.welcome-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.welcome-page h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 16px 0;
+}
+
+.welcome-page p {
+  font-size: 1.25rem;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+  max-width: 600px;
 }
 
 body {
   font-family: var(--font-family-base);
   margin: 0;
   padding: 0;
+}
+
+main#main-slot {
+  padding: 100px 24px 24px 24px;
+  box-sizing: border-box;
+  min-height: calc(100vh - 100px);
+  margin-right: 320px; /* Make room for aside slot */
+}
+
+/* On small screens, use full width */
+@media (max-width: 768px) {
+  main#main-slot {
+    margin-right: 0;
+  }
+}
+
+/* Aside slot for parcels (notifications, chat, etc.) */
+aside#aside-slot {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 320px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: #f5f5f5;
+  border-left: 1px solid #e0e0e0;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 900;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Responsive: hide aside on small screens */
+@media (max-width: 768px) {
+  aside#aside-slot {
+    display: none;
+  }
+}
+
+import-map-overrides-full {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2147483646;
+}
+
+import-map-overrides-full::part(button) {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+}
+
+import-map-overrides-full::part(dialog) {
+  z-index: 2147483647;
+  pointer-events: auto;
+}
+
+.shell-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgb(var(--color-primary-rgb));
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shell-header__brand strong {
+  font-size: 1.125rem;
+}
+
+.shell-header__nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.shell-header__nav a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.shell-header__nav a:hover {
+  text-decoration: underline;
+}
+
+.shell-header__nav a[data-active='true'] {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.shell-header__brand-switcher {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.shell-header__brand-switcher select {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.shell-header__overrides {
+  margin-left: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+  color: inherit;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.shell-header__overrides:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.shell-header__reset-overrides {
+  margin-left: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  color: inherit;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.shell-header__reset-overrides:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Owner Dashboard Styles */
+.owner-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-title {
+  color: rgb(var(--color-primary-rgb));
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.dashboard-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0 0 2rem 0;
+}
+
+/* Pilot Card Styles */
+.pilot-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.pilot-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.pilot-card__content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.pilot-card__avatar {
+  flex-shrink: 0;
+}
+
+.pilot-card__avatar-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid rgb(var(--color-primary-rgb));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pilot-card__info {
+  flex: 1;
+}
+
+.pilot-card__name {
+  color: rgb(var(--color-primary-rgb));
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.pilot-card__rating {
+  color: #666;
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+}
+
+/* Training Status Tile Styles */
+.training-status-tile {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+
+.training-status-tile:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.training-status-tile__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.training-status-tile__info {
+  flex: 1;
+}
+
+.training-status-tile__label {
+  color: #666;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.training-status-tile__days {
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Status Chip Styles */
+.status-chip {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-chip--success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-chip--warning {
+  background-color: #ff9800;
+  color: white;
+}
+
+.status-chip--error {
+  background-color: #f44336;
+  color: white;
+}
+
+.status-chip--default {
+  background-color: #9e9e9e;
+  color: white;
 }

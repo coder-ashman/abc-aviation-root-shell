@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="Default">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifeNexus Shell</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "single-spa": "https://esm.sh/single-spa@6.0.1",
+          "single-spa-layout": "https://esm.sh/single-spa-layout@2.0.0",
+          "@lifenexus/finance": "http://localhost:5174/remoteEntry.js",
+          "@lifenexus/messages": "http://localhost:4201/main.single-spa.js",
+          "@lifenexus/media": "http://localhost:4202/main.js"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="./src/theme.css" />
+  </head>
+  <body>
+    <header class="shell-header">
+      <strong>LifeNexus</strong>
+      <nav class="shell-nav">
+        <a href="/finance" data-nav>Finance</a>
+        <a href="/messages" data-nav>Messages</a>
+        <a href="/media" data-nav>Media</a>
+      </nav>
+    </header>
+    <single-spa-router>
+      <main id="main-slot">
+        <route path="/finance"><application name="@lifenexus/finance"></application></route>
+        <route path="/messages"><application name="@lifenexus/messages"></application></route>
+        <route path="/media"><application name="@lifenexus/media"></application></route>
+      </main>
+    </single-spa-router>
+    <script type="module">
+      import { start } from 'single-spa';
+      import root from './src/root-config.js';
+      root();
+      start();
+    </script>
+  </body>
+  </html>
+

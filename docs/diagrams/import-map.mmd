@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant Browser
+  participant Shell as Shell index.html
+  participant Map as Import Map
+  participant App as Micro‑Frontend
+
+  Browser->>Shell: Load index.html
+  Shell-->>Map: Define mappings (e.g. @owner-portal/web → URL)
+  Browser->>Shell: Execute root-config
+  Shell->>Browser: registerApplication(activeWhen)
+  Browser->>Map: Resolve @module name to URL
+  Browser->>App: import(URL)
+  App-->>Browser: Exports lifecycles/bootstrap
+  Browser->>App: call bootstrap → mount
+

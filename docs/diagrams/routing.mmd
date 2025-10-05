@@ -1,0 +1,14 @@
+flowchart LR
+  A[/URL: "/"/] -->|activeWhen ['/owner']| Owner[@owner-portal/web]
+  T1[/URL: "/training/a"/] -->|activeWhen ['/training/a']| TrA[@crew/training-a]
+  T2[/URL: "/training/b"/] -->|activeWhen ['/training/b']| TrB[@crew/training-b]
+  M[/URL: "/maintenance"/] -->|activeWhen ['/maintenance']| Maint[@maintenance/app]
+
+  subgraph Router[single-spa-router]
+  end
+
+  A --> Router
+  T1 --> Router
+  T2 --> Router
+  M --> Router
+

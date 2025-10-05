@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Import Map Overrides</title>
+</head>
+<body>
+    <h1>Clear Import Map Overrides</h1>
+    <button onclick="clearOverrides()">Clear Overrides</button>
+    <div id="status"></div>
+    
+    <script>
+        function clearOverrides() {
+            try {
+                localStorage.removeItem('import-map-overrides');
+                document.getElementById('status').innerHTML = '✅ Overrides cleared! <a href="http://localhost:9000">Go to Shell</a>';
+            } catch (error) {
+                document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

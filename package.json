@@ -3,12 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "serve . -l 9000",
-    "build": "echo 'Single-spa shell build is handled by bundling of import-map consumers'"
+    "predev": "node scripts/prebuild.js development",
+    "dev": "node server.js",
+    "start": "node server.js",
+    "prebuild": "node scripts/prebuild.js production",
+    "build": "echo 'Single-spa shell build is handled by bundling of import-map consumers'",
+    "restore": "cp index.html.backup index.html && echo 'Restored original index.html'"
   },
   "dependencies": {
+    "import-map-overrides": "^6.1.0",
     "single-spa": "^6.0.0",
-    "single-spa-layout": "^2.0.0",
-    "import-map-overrides": "^2.0.0"
+    "single-spa-layout": "^2.0.0"
+  },
+  "devDependencies": {
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5",
+    "serve": "^14.2.5"
   }
 }

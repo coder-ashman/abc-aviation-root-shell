@@ -1,0 +1,20 @@
+{
+  "name": "lifenexus-media-vue",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite --port 4202",
+    "build": "vite build",
+    "preview": "vite preview --port 4202"
+  },
+  "dependencies": {
+    "vue": "^3.3.4",
+    "single-spa-vue": "^2.0.0"
+  },
+  "devDependencies": {
+    "vite": "^4.4.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "typescript": "^5.3.0"
+  }
+}
+

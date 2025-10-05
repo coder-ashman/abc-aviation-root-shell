@@ -1,0 +1,13 @@
+{
+  "name": "lifenexus-messages",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview --port 4201"
+  },
+  "devDependencies": {
+    "vite": "^4.4.0"
+  }
+}
+

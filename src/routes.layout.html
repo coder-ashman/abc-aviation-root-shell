@@ -1,16 +1,26 @@
 <single-spa-router>
   <main id="main-slot">
-    <!-- Root route: Owner portal web -->
-    <route path="/">
+    <!-- Owner portal route -->
+    <route path="/owner">
       <application name="@owner-portal/web"></application>
     </route>
-    <!-- Training routes: A/B/C training micro‑frontends scoped via import map -->
-    <route path="/training">
-      <application name="@crew/training"></application>
+    <!-- Training routes: explicit entries for Angular and RNW builds -->
+    <route path="/training/a">
+      <application name="@crew/training-a"></application>
+    </route>
+    <route path="/training/b">
+      <application name="@crew/training-b"></application>
     </route>
     <!-- Maintenance app (Vue) -->
     <route path="/maintenance">
       <application name="@maintenance/app"></application>
+    </route>
+    <!-- Root route: Shell only (no microfrontend) - must be last as default -->
+    <route default>
+      <div class="welcome-page">
+        <h1>ABC Aviation Management Portal</h1>
+        <p>Select a module from the navigation menu to get started.</p>
+      </div>
     </route>
   </main>
   <aside id="aside-slot">
