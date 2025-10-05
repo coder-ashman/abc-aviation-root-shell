@@ -1,0 +1,21 @@
+<single-spa-router>
+  <main id="main-slot">
+    <!-- Root route: Owner portal web -->
+    <route path="/">
+      <application name="@owner-portal/web"></application>
+    </route>
+    <!-- Training routes: A/B/C training micro‑frontends scoped via import map -->
+    <route path="/training">
+      <application name="@crew/training"></application>
+    </route>
+    <!-- Maintenance app (Vue) -->
+    <route path="/maintenance">
+      <application name="@maintenance/app"></application>
+    </route>
+  </main>
+  <aside id="aside-slot">
+    <!-- Parcels mount here for notifications and chat -->
+    <parcel name="@shared/notifications"></parcel>
+    <parcel name="@shared/chat"></parcel>
+  </aside>
+</single-spa-router>

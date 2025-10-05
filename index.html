@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="A">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABC Aviation Shell</title>
+    <!-- Import map defining global modules and per‑tenant overrides -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://cdn.skypack.dev/react@18",
+          "react-dom": "https://cdn.skypack.dev/react-dom@18",
+          "@owner-portal/web": "/owner-portal-web/remoteEntry.js",
+          "@owner-portal/native": "/owner-portal-native/index.js",
+          "@crew/training": "/training-a/remoteEntry.js",
+          "@maintenance/app": "/maintenance/remoteEntry.js",
+          "@shared/notifications": "/parcels/notifications.js",
+          "@shared/chat": "/parcels/chat.js"
+        },
+        "scopes": {
+          "/subsidiary-b/": {
+            "@crew/training": "/training-b/remoteEntry.js"
+          },
+          "/subsidiary-c/": {
+            "@crew/training": "/training-c/remoteEntry.js"
+          }
+        }
+      }
+    </script>
+    <!-- Tools for development: import‑map overrides and single‑spa inspector (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides/dist/import-map-overrides.js"></script>
+    <!-- Root styling and theme variables loaded once -->
+    <link rel="stylesheet" href="/src/theme.css" />
+  </head>
+  <body>
+    <!-- Brand switcher UI -->
+    <div id="brand-switcher"></div>
+    <!-- Single‑spa will mount applications into the following slots defined by routes.layout.html -->
+    <div id="single-spa-application:main"></div>
+    <div id="single-spa-application:aside"></div>
+    <!-- Load the root config and start single‑spa -->
+    <script type="module">
+      import { start } from 'single-spa';
+      import rootConfig from './src/root-config.ts';
+      import './src/brand-switcher.ts';
+      rootConfig();
+      start();
+    </script>
+  </body>
+</html>

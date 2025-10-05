@@ -1,0 +1,14 @@
+{
+  "name": "root-shell",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "serve . -l 9000",
+    "build": "echo 'Single-spa shell build is handled by bundling of import-map consumers'"
+  },
+  "dependencies": {
+    "single-spa": "^6.0.0",
+    "single-spa-layout": "^2.0.0",
+    "import-map-overrides": "^2.0.0"
+  }
+}

@@ -1,0 +1,61 @@
+/*
+ * Theme definitions for the root shell.
+ * Each brand defines CSS variables for colours and typography.
+ * These variables are consumed by NativeWind, Tailwind and MUI across micro‑frontends.
+ */
+
+:root {
+  --font-family-base: 'Inter', sans-serif;
+  --transition-duration: 0.2s;
+}
+
+/* Brand A – default */
+:root[data-brand="A"] {
+  --color-primary-rgb: 25 118 210; /* blue */
+  --color-secondary-rgb: 255 193 7; /* amber */
+  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
+  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
+  --tailwind-primary: 25 118 210;
+}
+
+/* Brand B */
+:root[data-brand="B"] {
+  --color-primary-rgb: 210 85 27; /* orange */
+  --color-secondary-rgb: 0 150 136; /* teal */
+  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
+  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
+  --tailwind-primary: 210 85 27;
+}
+
+/* Brand C */
+:root[data-brand="C"] {
+  --color-primary-rgb: 93 64 155; /* purple */
+  --color-secondary-rgb: 244 67 54; /* red */
+  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
+  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
+  --tailwind-primary: 93 64 155;
+}
+
+/* Brand Atlantic */
+:root[data-brand="Atlantic"] {
+  --color-primary-rgb: 0 102 204; /* deep blue */
+  --color-secondary-rgb: 0 153 51; /* green */
+  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
+  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
+  --tailwind-primary: 0 102 204;
+}
+
+/* Brand Pacific */
+:root[data-brand="Pacific"] {
+  --color-primary-rgb: 0 172 193; /* cyan */
+  --color-secondary-rgb: 255 87 34; /* deep orange */
+  --mui-palette-primary-main: rgb(var(--color-primary-rgb));
+  --mui-palette-secondary-main: rgb(var(--color-secondary-rgb));
+  --tailwind-primary: 0 172 193;
+}
+
+body {
+  font-family: var(--font-family-base);
+  margin: 0;
+  padding: 0;
+}
